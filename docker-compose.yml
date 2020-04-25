@@ -21,6 +21,8 @@ services:
     container_name: librenms
     volumes:
       - ./data:/data
+      - ./php.ini:/usr/local/php/conf.d/php.ini-production
+      - ./php.ini:/usr/local/php/conf.d/php.ini-development
     ports:
       - 80:80
     depends_on:
