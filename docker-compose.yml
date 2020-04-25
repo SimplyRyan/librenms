@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  mysql:
+    image: mariadb:10.1
+    container_name: librenms-db
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./50-server.cnf:/etc/mysql/mariadb.conf.d/50-server.cnf:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootP4ss
+      - DB_USER=librenms
+      - DB_PASS=librenmsP4s5
+      - MYSQL_DATABASE=librenms
+      - TZ=Asia/Jakarta
+    restart: always
+
+  librenms:
+    build:
+      context: ./librenms
+    container_name: librenms
+    volumes:
+      - ./data:/data
+    ports:
+      - 80:80
+    depends_on:
+      - mysql
+    environment:
+      - DB_TYPE=mysql
+      - DB_HOST=mysql
+      - DB_NAME=librenms
+      - DB_USER=librenms
+      - DB_PASS=librenmsP4s5
+      - TZ=Asia/Jakarta
+    restart: always
