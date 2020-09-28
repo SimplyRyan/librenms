@@ -5,8 +5,8 @@ LABEL Description="LibreNMS - APACHE2"
 USER root
 RUN rm -rf /etc/localtime
 RUN ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
-RUN apt  update
-RUN apt  upgrade
+RUN apt update -y
+RUN apt upgrade -y
 RUN apt install -y zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libzip-dev libsnmp-dev mtr-tiny nmap nagios-plugins ipmitool nano 
 RUN apt install -y git fping graphviz imagemagick acl python-memcache python-mysqldb rrdtool snmp snmpd whois rrdcached unzip
 RUN docker-php-ext-configure gd
